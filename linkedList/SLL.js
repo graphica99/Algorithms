@@ -61,7 +61,6 @@ class SinglyLinkedList {
     }
     console.log("value not found");
   }
-
   insert(key, data) {
     for (var i = 0; i <= key - 1; i++) {
       this.head = this.head.next;
@@ -72,7 +71,6 @@ class SinglyLinkedList {
     node.next = temp;
     console.log(this.head);
   }
-
   get(pos) {
     for (var i = 0; i < this.length; i++) {
       if (pos === i) {
@@ -82,7 +80,6 @@ class SinglyLinkedList {
       this.head = this.head.next;
     }
   }
-
   remove(key, pos) {
     // delete this.get(0);
     var prevNode = this.get(pos - 1);
@@ -90,7 +87,6 @@ class SinglyLinkedList {
     prevNode.next = nextNode;
     this.length--;
   }
-
   isSorted() {
     var data = 0;
     for (var i = 0; i < this.length; i++) {
@@ -100,7 +96,6 @@ class SinglyLinkedList {
     }
     return true;
   }
-
   removeDuplicate() {
     var p = this.head;
     var q = p.next;
@@ -115,7 +110,6 @@ class SinglyLinkedList {
       }
     }
   }
-
   reverse() {
     var arr = [];
     for (var i = 0, j = this.length - 1; i < this.length; i++, j--) {
@@ -124,19 +118,26 @@ class SinglyLinkedList {
     }
     this.create(arr);
   }
-
-  reverseLink(q, p) {
-    if (p != null) {
-      this.reverseLink(p, p.next);
-      p.next = q;
-    } else {
-      this.head = q;
+  reverseLink() {
+    var p = this.head;
+    var q = null;
+    var r = null;
+    while (p) {
+      r = q;
+      q = p;
+      p = p.next;
+      q.next = r;
     }
+    this.head = q;
+    console.log(this);
   }
 }
 var singlyLinkedList = new SinglyLinkedList();
 singlyLinkedList.create([10, 20, 30, 40, 50, 60, 70]);
-singlyLinkedList.reverseLink(this.head, this.head);
+
+// singlyLinkedList.reverseLink();
+// singlyLinkedList.displayRecursively();
+// singlyLinkedList.reverseLink(this.head, this.head);
 // singlyLinkedList.analogBinary();
 // singlyLinkedList.create([1, 2, 2, 4, 5, 5, 7]);
 // singlyLinkedList.removeDuplicate()
@@ -144,7 +145,7 @@ singlyLinkedList.reverseLink(this.head, this.head);
 // singlyLinkedList.insert(1, 25);
 // singlyLinkedList.remove(20, 1);
 // singlyLinkedList.search(20);
-// singlyLinkedList.displayRecursively();
+
 // singlyLinkedList.display();
 // singlyLinkedList.create(10);
 // singlyLinkedList.create(20);
