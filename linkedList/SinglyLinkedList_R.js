@@ -92,32 +92,112 @@ class LinkedList {
         break;
     }
   }
+  getLinkedList(pos) {
+    for (var i = 1; i <= this.length; i++) {
+      if (pos === i) {
+        return this.head;
+      }
+      this.head = this.head.next;
+    }
+  }
   insert(index, value) {
     var node = new Node(value);
-
-    for (var i = 1; i <= this.length; i++) {
-      i;
-      var pos = this.head;
-      if (index == i) {
-        console.log(pos);
-        var tempPos = pos.next;
-        pos.next = node;
-        node.next = tempPos;
-        console.log(this);
-      }
+    var pos = this.getLinkedList(index);
+    var tempPos = pos.next;
+    pos.next = node;
+    node.next = tempPos;
+    this.length++;
+  }
+  insertFirst(val) {
+    var node = new Node(val);
+    var head = this.head;
+    node.next = head;
+    this.head = node;
+  }
+  insertLast(val) {
+    var node = new Node(val);
+    var tail = this.tail;
+    tail.next = node;
+    this.tail = node;
+  }
+  // ****
+  insertIntoSortedList(value) {
+    var node = new Node(value);
+    var p = this.head;
+    var q = null;
+    while (p && p.data < value) {
+      q = p;
+      p = p.next;
+      console.log(this.head.data);
+      console.log(q.data);
+      console.log(p.data);
+      this.head = this.head.next;
     }
-    this.head = this.head.next;
+    node.next = q.next;
+    q.next = node;
+    console.log(this);
+  }
+  deleteLinkedList(pos) {
+    var p = this.head;
+    var q = null;
+    for (var i = 0; i < pos - 1; i++) {
+      q = p;
+      p = p.next;
+    }
+    q.next = p.next;
+  }
+  isSorted() {
+    var max = 0;
+    for (var i = 0; i < this.length; i++) {
+      if (this.head.data < max) {
+        return false;
+      } else {
+        max = this.head.data;
+      }
+      this.head = this.head.next;
+    }
+    return true;
+  }
+  reversingLinkedList() {
+    var q = null;
+    var p = null;
+    var r = this.head;
+    while (r != null) {
+      q = p;
+      p = r;
+      r = r.next;
+      p.next = q;
+      // console.log(q)
+      console.log(this);
+    }
+    this.head = q;
+  }
+  isLoop() {
+    let q = this.head;
+    let p = this.head;
+    do {
+      p = p.next;
+      q = q.next;
+      q = q != null ? q.next : null;
+    } while (q && p);
+    return p == q ? true : false;
   }
 }
 
 var SLL = new LinkedList();
-// SLL.create(10);
-// SLL.create(20);
-// SLL.create(30);
+
 SLL.createArr([10, 20, 30, 40]);
-SLL.insert(2, 25);
+console.log(SLL.isLoop());
+// SLL.reversingLinkedList();
+// console.log(SLL.isSorted());
+// SLL.deleteLinkedList(2);
+// SLL.insertIntoSortedList(25)
+// SLL.insertFirst(5)
+// SLL.insertLast(50)
+// SLL.getLinkedList(4)
+// SLL.insert(2, 25);
 // SLL.linearSearch(10,'value');
 // SLL.maxElement()
 // SLL.sumOfAllElement();
-SLL.displayRecursively();
+// SLL.displayRecursively();
 // SLL.display();
