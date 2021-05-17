@@ -27,10 +27,7 @@ class Queue {
   }
 
   isEmpty() {
-    if (queue.rear === queue.front) {
-      return true;
-      console.log("queue is empty");
-    }
+    return queue.rear === queue.front;
   }
 }
 
@@ -50,31 +47,38 @@ class BinaryTree {
     this.p = null;
   }
 
-  create(data) {
-    if (this.root === null) {
-      var node = new Node(data);
+  create(data, pos) {
+    var node = new Node(data);
+    if (this.root === null && pos == "root") {
       this.root = node;
-      this.queue.enqueue(this.root);
+
+      return this;
     } else {
-      while (!this.queue.isEmpty()) {
-        this.p = this.queue.dequeue();
-        console.log(this.p);
-        //   if (data !== -1) {
-        //     var n = new Node(data);
-        //     this.p.leftNode = n;
-        //     this.queue.enqueue(n);
-        //   }
-        //   if (data !== -1) {
-        //     var n = new Node(data);
-        //     this.p.rightNode = n;
-        //     this.queue.enqueue(n);
-        //   }
+      while (true) {
+        let current = this.root;
+        console.log(current.leftNode);
+        if (pos == "left") {
+          if (current.leftNode === null) {
+            current.leftNode = node;
+            return this;
+          }
+          current = current.leftNode;
+        } else if (pos == "right") {
+          if (current.rightNode === null) {
+            current.rightNode = node;
+            return this;
+          }
+          current = current.rightNode;
+        }
       }
     }
   }
 }
 
 var binaryTree = new BinaryTree();
-binaryTree.create(10);
-binaryTree.create(20);
+binaryTree.create(10, "root");
+binaryTree.create(20, "left");
+binaryTree.create(30, "right");
+// binaryTree.create(35, "right");
+
 // binaryTree.create(30);
