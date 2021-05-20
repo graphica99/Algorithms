@@ -1,4 +1,7 @@
 //Representing a tree with linked
+var prompt = require("prompt-sync")();
+// var n = prompt("How many more times? ");
+// console.log(n);
 class Node {
   constructor(data) {
     this.data = data;
@@ -11,39 +14,36 @@ class BinaryTree {
     this.root = null;
   }
 
-  create(data, pos) {
-    var node = new Node(data);
-    if (this.root === null && pos == "root") {
-      this.root = node;
-      return this;
-    }
-    let current = this.root;
-    while (true) {
-      //         console.log(current.leftNode);
-      //  console.log(current)
-      if (pos == "left") {
-        if (current.leftNode === null) {
-          current.leftNode = node;
-          return this;
-        }
-        current = current.leftNode;
-      } else if (pos == "right") {
-        if (current.rightNode === null) {
-          current.rightNode = node;
-          return this;
-        }
-        current = current.rightNode;
+  create() {
+    var queue = [];
+    //push to insert at back || shift to remove from front
+    var rn = prompt("enter root node ");
+    var node = new Node(rn);
+    this.root = node;
+    queue.push(this.root);
+
+    while (queue.length > 0) {
+      var p = queue.shift();
+      var l = prompt(`enter left child ${p.data} -> `);
+
+      if (Number(l) !== -1) {
+        var node = new Node(l);
+        p.leftNode = node;
+        queue.push(node);
+      }
+
+      var r = prompt(`enter right child ${p.data} -> `);
+      if (Number(r) !== -1) {
+        var node = new Node(r);
+        p.rightNode = node;
+        queue.push(node);
       }
     }
+
+    console.log(this);
   }
 }
 
 var binaryTree = new BinaryTree();
-binaryTree.create(10, "root");
-binaryTree.create(20, "left");
-binaryTree.create(30, "right");
-
-binaryTree.create(35, "left");
-binaryTree.create(40, "right");
-
-// binaryTree.create(30);
+// binaryTree.test();
+binaryTree.create();
