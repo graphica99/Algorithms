@@ -39,11 +39,87 @@ class BinaryTree {
         queue.push(node);
       }
     }
+    // console.log(this);
+  }
 
-    console.log(this);
+  levelOrderTraversal() {
+    var close = [];
+    close.push(this.root);
+    while (close.length > 0) {
+      let popped = close.shift();
+      console.log(popped.data);
+      if (popped.leftNode !== null) {
+        close.push(popped.leftNode);
+      }
+      if (popped.rightNode !== null) {
+        close.push(popped.rightNode);
+      }
+    }
+  }
+
+  countNodes() {
+    //push all the element inside an array and return it length;
+    var x = 0;
+    var close = [];
+    close.push(this.root);
+    while (close.length > 0) {
+      let popped = close.shift();
+      x++;
+      if (popped.leftNode !== null) {
+        close.push(popped.leftNode);
+      }
+      if (popped.rightNode !== null) {
+        close.push(popped.rightNode);
+      }
+    }
+    console.log(x);
+  }
+
+  fullNode() {
+    var x = 0;
+    var close = [];
+    close.push(this.root);
+    while (close.length > 0) {
+      let popped = close.shift();
+      if (popped.leftNode !== null) {
+        close.push(popped.leftNode);
+      }
+      if (popped.rightNode !== null) {
+        close.push(popped.rightNode);
+      }
+      if (popped.rightNode && popped.leftNode) {
+        x++;
+      }
+    }
+    console.log(x);
+  }
+
+  HalfNode() {
+    var x = 0;
+    var close = [];
+    close.push(this.root);
+    while (close.length > 0) {
+      let popped = close.shift();
+      if (popped.leftNode !== null) {
+        close.push(popped.leftNode);
+      }
+      if (popped.rightNode !== null) {
+        close.push(popped.rightNode);
+      }
+      if (
+        (popped.rightNode === null && popped.leftNode) ||
+        (popped.rightNode && popped.leftNode === null)
+      ) {
+        x++;
+      }
+    }
+    console.log(x);
   }
 }
 
 var binaryTree = new BinaryTree();
 // binaryTree.test();
 binaryTree.create();
+// binaryTree.levelOrderTraversal();
+// binaryTree.countNodes();
+binaryTree.HalfNode();
