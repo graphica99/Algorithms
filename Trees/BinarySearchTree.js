@@ -36,19 +36,24 @@ class BinarySearchTree {
     }
   }
 
-  search(value) {
-    var current = this.root;
-    while (current != null) {
-      if (value === current.data) return current.data;
-      if (value < current.data) {
-        console.log("less");
-        current = current.leftNode;
-      } else {
-        current = current.rightNode;
-      }
+  current = this.root;
+  searchRecursion(current, value) {
+    var found = false;
+    if (current === null) {
+      return null;
     }
-    return null;
+    if (value === current.data) {
+      found = true;
+      return current;
+    }
+    if (value < current.data) {
+      return this.searchRecursion(current.leftNode, value);
+    } else if (value > current.data) {
+      return this.searchRecursion(current.rightNode, value);
+    }
   }
+
+  insert() {}
 }
 
 var tree = new BinarySearchTree();
@@ -59,7 +64,7 @@ tree.create(11);
 tree.create(2);
 tree.create(16);
 tree.create(7);
-console.log(tree.search());
+console.log(tree.searchRecursion(16));
 
 //      10
 //   5     13
