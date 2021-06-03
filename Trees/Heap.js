@@ -18,9 +18,8 @@ function insert(arr) {
 function create(arr) {
   insert(arr);
 }
-
-// insert([40, 30, 15, 20, 10, 12, 6, 5]);
-create([13, 14, 9, 7, 60]);
+insert([30, 15, 20, 10, 12, 6, 5, 40, 50]);
+// create([13, 14, 9, 7, 60]);
 
 function merge(arr1, arr2) {
   //merging two unsorted array
